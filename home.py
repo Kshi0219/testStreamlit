@@ -40,8 +40,9 @@ with tab1:      # 키퍼 탭
     with st.container(border=True):
         viewMode=st.radio('Select View Mode',['One Player','Compare Two players'],captions=['한 명의 선수 조회','두 명의 선수 비교'],horizontal=True)
         if viewMode=='One Player':
-            gk_Goalkeeping=gkStatsDf.iloc[:,:20]
-            keeperName=st.selectbox('Select player name 👇',gk_Goalkeeping['player_nm'],placeholder='Search')
+            gk_Goalkeeping=gkStatsDf[['player_nm','player_team','player_country','player_age','player_foot','player_height','player_Weight']+
+                                     columnDict['GK']['GoalKeeping']]
+            keeperName=st.selectbox('Select player name 👇',gk_Goalkeeping['player_nm'],placeholder='Search',index=None)
             gkNameSelectedDf=gk_Goalkeeping.query(f"player_nm=='{keeperName}'")
     st.divider()
     with st.container(border=True):
